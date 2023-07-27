@@ -113,14 +113,18 @@ impl App {
     pub fn toggle_task(&mut self) {
         match self.list {
             true => {
-                self.uncompleted
-                    .push(self.completed.remove(self.item as usize - 1));
-                self.move_cursor(true)
+                if !self.uncompleted.is_empty() {
+                    self.uncompleted
+                        .push(self.completed.remove(self.item as usize - 1));
+                    self.move_cursor(true)
+                }
             }
             false => {
-                self.completed
-                    .push(self.uncompleted.remove(self.item as usize));
-                self.move_cursor(true)
+                if !self.completed.is_empty() {
+                    self.completed
+                        .push(self.uncompleted.remove(self.item as usize));
+                    self.move_cursor(true)
+                }
             }
         }
     }
